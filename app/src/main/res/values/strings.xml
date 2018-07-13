@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">zeewaka-kotlin</string>
     <string name="action_settings">Settings</string>
+    <string name="launcher_name">ZeeWaKa</string>
+    <string name="msg_generic_no_data">No Data To Display</string>
+    <string name="lbl_refresh">Refresh</string>
 </resources>
