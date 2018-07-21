@@ -8,6 +8,7 @@ import xyz.tunlinaung.kotlin.data.vo.HealthCareInfoVO
 
 class HealthInfoNewsPresenter : BasePresenter<HealthInfoNewsView>() {
 
+    //TODO how to clear null check (can't lateinit) how to lazy
     var mHealthInfoListLD: MutableLiveData<List<HealthCareInfoVO>>? = null
 
     override fun initPresenter(view: HealthInfoNewsView?) {

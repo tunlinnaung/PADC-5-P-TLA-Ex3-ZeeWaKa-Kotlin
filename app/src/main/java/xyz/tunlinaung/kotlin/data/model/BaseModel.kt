@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit
 
 abstract class BaseModel(context: Context) {
 
-    protected var mTheApi: ZeeWaKaApi? = null
-    protected var mTheDb: ZeeWaKaDB? = null
+    protected var mTheApi: ZeeWaKaApi
+    protected var mTheDb: ZeeWaKaDB
 
     init {
         val okHttpClient = OkHttpClient.Builder()

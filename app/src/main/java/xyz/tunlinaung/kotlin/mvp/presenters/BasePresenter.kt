@@ -4,7 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import xyz.tunlinaung.kotlin.mvp.views.BaseView
 
-// TODO("how to extends BaseView from T")
+// TODO("how to extends BaseView from T") - should use in/out?
 open class BasePresenter<T : BaseView> : ViewModel() {
 
     val mView: T? = null

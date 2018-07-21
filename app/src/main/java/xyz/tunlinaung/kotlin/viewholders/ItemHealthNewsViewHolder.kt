@@ -6,12 +6,12 @@ import kotlinx.android.synthetic.main.view_item_health_news.view.*
 import xyz.tunlinaung.kotlin.data.vo.HealthCareInfoVO
 import xyz.tunlinaung.kotlin.mvp.views.HealthInfoNewsView
 
-class ItemHealthNewsViewHolder(itemView: View, private var view: HealthInfoNewsView) : BaseViewHolder<HealthCareInfoVO>(itemView) {
+class ItemHealthNewsViewHolder(itemView: View?, private var view: HealthInfoNewsView) : BaseViewHolder<HealthCareInfoVO>(itemView) {
 
     override fun setData(data: HealthCareInfoVO, position: Int) {
         mData = data
 
-        itemView!!.tvHealthNewsTitle!!.text = data.title
+        itemView?.tvHealthNewsTitle?.text = data.title
 
         Glide.with(itemView.context)
                 .load(data.image)
@@ -25,11 +25,9 @@ class ItemHealthNewsViewHolder(itemView: View, private var view: HealthInfoNewsV
         }
         */
 
-        if (data.author != null) {
-            itemView.tvNewsAuthor!!.text = data.author.authorName
-        }
+        itemView.tvNewsAuthor?.text = data.author.authorName
 
-        itemView.tvNewsDate!!.text = data!!.publishedDate
+        itemView.tvNewsDate?.text = data.publishedDate
 
         itemView.ivNewsHealthImage.setOnClickListener { view.showWebView(mData!!.completeUrl) }
     }

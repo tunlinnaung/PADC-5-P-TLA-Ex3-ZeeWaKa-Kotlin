@@ -50,8 +50,9 @@ class SmartRecyclerView : RecyclerView {
      */
     private fun checkIfEmpty() {
         val isEmpty = adapter.itemCount == 0
-        if (mEmptyView != null) {
-            mEmptyView!!.visibility = if (isEmpty) View.VISIBLE else View.INVISIBLE
+        //TODO to clean duplicate code
+        mEmptyView?.let {
+            it.visibility = if (isEmpty) View.VISIBLE else View.INVISIBLE
             visibility = if (isEmpty) View.INVISIBLE else View.VISIBLE
         }
     }

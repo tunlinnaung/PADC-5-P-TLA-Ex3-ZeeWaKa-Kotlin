@@ -18,11 +18,11 @@ class EmptyViewPod : RelativeLayout {
     }
 
     fun setEmptyData(emptyImageId: Int, emptyMsg: String) {
-        ivEmpty!!.setImageResource(emptyImageId)
-        tvEmpty!!.text = emptyMsg
+        ivEmpty?.setImageResource(emptyImageId)
+        tvEmpty?.text = emptyMsg
     }
 
     fun setEmptyData(emptyMsg: String) {
-        tvEmpty!!.text = emptyMsg
+        tvEmpty?.text = emptyMsg
     }
 }

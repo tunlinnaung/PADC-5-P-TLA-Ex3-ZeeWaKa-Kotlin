@@ -2,26 +2,23 @@ package xyz.tunlinaung.kotlin.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import kotlinx.android.synthetic.main.activity_home.*
 import xyz.tunlinaung.kotlin.adapters.HealthNewsAdapter
 import xyz.tunlinaung.kotlin.mvp.presenters.HealthInfoNewsPresenter
 import xyz.tunlinaung.kotlin.mvp.views.HealthInfoNewsView
 import xyz.tunlinaung.zeewaka_kotlin.R
-import android.content.Intent
-import android.net.Uri
 
 
 class HomeActivity : BaseActivity(), HealthInfoNewsView {
 
-    private var mHealthInfoAdapter: HealthNewsAdapter? = null
-    private var mPresenter: HealthInfoNewsPresenter? = null
+    private lateinit var mHealthInfoAdapter: HealthNewsAdapter
+    private lateinit var mPresenter: HealthInfoNewsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +28,7 @@ class HomeActivity : BaseActivity(), HealthInfoNewsView {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         mPresenter = ViewModelProviders.of(this).get(HealthInfoNewsPresenter::class.java!!)
-        mPresenter!!.initPresenter(this)
+        mPresenter.initPresenter(this)
 
         rvNews.mEmptyView = vpEmptyNews
         mHealthInfoAdapter = HealthNewsAdapter(applicationContext, this)
@@ -40,15 +37,15 @@ class HomeActivity : BaseActivity(), HealthInfoNewsView {
 
         swipeRefreshLayout.isRefreshing = true
 
-        mPresenter!!.mHealthInfoListLD!!.observe(this, Observer {
+        mPresenter.mHealthInfoListLD!!.observe(this, Observer {
             swipeRefreshLayout.isRefreshing = false
-            mHealthInfoAdapter!!.appendNewData(it!!)
+            mHealthInfoAdapter.appendNewData(it!!)
         })
 
         swipeRefreshLayout.setOnRefreshListener {
             val healthAdapterVal = mHealthInfoAdapter
-            healthAdapterVal!!.clearData()
-            mPresenter!!.loadHealthInfo()
+            healthAdapterVal.clearData()
+            mPresenter.loadHealthInfo()
         }
 
         fab.setOnClickListener { view ->

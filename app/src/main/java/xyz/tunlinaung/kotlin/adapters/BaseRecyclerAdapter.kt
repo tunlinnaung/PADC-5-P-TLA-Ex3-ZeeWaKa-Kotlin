@@ -9,13 +9,13 @@ import java.util.ArrayList
 
 abstract class BaseRecyclerAdapter<T, W>(context: Context) : RecyclerView.Adapter<BaseViewHolder<W>>() {
 
-    protected var mData: MutableList<W>? = null
+    protected var mData: MutableList<W>
     protected var mLayoutInflator: LayoutInflater
 
     val items: List<W>
         get() {
             val data = mData
-            return data ?: ArrayList()
+            return data
         }
 
     init {
@@ -28,7 +28,7 @@ abstract class BaseRecyclerAdapter<T, W>(context: Context) : RecyclerView.Adapte
     }
 
     override fun getItemCount(): Int {
-        return mData!!.size
+        return mData.size
     }
 
     fun setNewData(newData: MutableList<W>) {
@@ -37,22 +37,22 @@ abstract class BaseRecyclerAdapter<T, W>(context: Context) : RecyclerView.Adapte
     }
 
     fun appendNewData(newData: List<W>) {
-        mData!!.addAll(newData)
+        mData.addAll(newData)
         notifyDataSetChanged()
     }
 
     fun getItemAt(position: Int): W? {
-        return if (position < mData!!.size - 1) mData!![position] else null
+        return if (position < mData.size - 1) mData[position] else null
 
     }
 
     fun removeData(data: W) {
-        mData!!.remove(data)
+        mData.remove(data)
         notifyDataSetChanged()
     }
 
     fun addNewData(data: W) {
-        mData!!.add(data)
+        mData.add(data)
         notifyDataSetChanged()
     }
 
