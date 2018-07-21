@@ -9,7 +9,7 @@ import xyz.tunlinaung.kotlin.data.vo.HealthCareInfoVO
 class HealthInfoNewsPresenter : BasePresenter<HealthInfoNewsView>() {
 
     //TODO how to clear null check (can't lateinit) how to lazy
-    var mHealthInfoListLD: MutableLiveData<List<HealthCareInfoVO>>? = null
+    lateinit var mHealthInfoListLD: MutableLiveData<List<HealthCareInfoVO>>
 
     override fun initPresenter(view: HealthInfoNewsView?) {
         super.initPresenter(view)
@@ -18,8 +18,12 @@ class HealthInfoNewsPresenter : BasePresenter<HealthInfoNewsView>() {
         loadHealthInfo()
     }
 
-    open fun loadHealthInfo() {
-        ZeeWaKaModel.getInstance().startLoadingHealthcareInfo(mHealthInfoListLD!!, mErrorLD)
+    fun loadHealthInfo() {
+        ZeeWaKaModel.getInstance().startLoadingHealthcareInfo(mHealthInfoListLD, mErrorLD)
+    }
+
+    fun onPullRefresh() {
+        loadHealthInfo()
     }
 
 }

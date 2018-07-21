@@ -37,15 +37,19 @@ class HomeActivity : BaseActivity(), HealthInfoNewsView {
 
         swipeRefreshLayout.isRefreshing = true
 
-        mPresenter.mHealthInfoListLD!!.observe(this, Observer {
+        mPresenter.mHealthInfoListLD.observe(this, Observer {
             swipeRefreshLayout.isRefreshing = false
-            mHealthInfoAdapter.appendNewData(it!!)
+            mHealthInfoAdapter.setNewData(it!!)
+        })
+
+        mPresenter.mErrorLD.observe(this, Observer {
+            Snackbar.make(rvNews, it.toString(), Snackbar.LENGTH_INDEFINITE).show()
         })
 
         swipeRefreshLayout.setOnRefreshListener {
-            val healthAdapterVal = mHealthInfoAdapter
-            healthAdapterVal.clearData()
-            mPresenter.loadHealthInfo()
+            //val healthAdapterVal = mHealthInfoAdapter
+            //healthAdapterVal.clearData()
+            mPresenter.onPullRefresh()
         }
 
         fab.setOnClickListener { view ->

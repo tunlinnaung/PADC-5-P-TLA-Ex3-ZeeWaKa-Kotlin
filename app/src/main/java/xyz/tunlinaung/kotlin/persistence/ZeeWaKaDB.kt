@@ -9,10 +9,9 @@ import android.content.Context
 import xyz.tunlinaung.kotlin.persistence.dao.HealthCareDao
 import xyz.tunlinaung.kotlin.persistence.typeconverters.AuthorJsonTypeConverter
 
-
 @Database(entities = [(HealthCareInfoVO::class)], version = 3, exportSchema = false)
 @TypeConverters(AuthorJsonTypeConverter::class)
-open abstract class ZeeWaKaDB : RoomDatabase() {
+abstract class ZeeWaKaDB : RoomDatabase() {
 
     companion object {
         private const val DB_NAME = "ZeeWaKa.DB"
@@ -26,6 +25,6 @@ open abstract class ZeeWaKaDB : RoomDatabase() {
         }
     }
 
-    open abstract fun healthCareDao(): HealthCareDao
+    abstract fun healthCareDao(): HealthCareDao
 
 }

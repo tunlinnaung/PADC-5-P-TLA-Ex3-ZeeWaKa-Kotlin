@@ -31,8 +31,8 @@ abstract class BaseRecyclerAdapter<T, W>(context: Context) : RecyclerView.Adapte
         return mData.size
     }
 
-    fun setNewData(newData: MutableList<W>) {
-        mData = newData
+    fun setNewData(newData: List<W>) {
+        mData = newData.toMutableList()
         notifyDataSetChanged()
     }
 

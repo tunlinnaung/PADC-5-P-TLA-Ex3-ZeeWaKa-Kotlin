@@ -49,11 +49,44 @@ class SmartRecyclerView : RecyclerView {
      * check if adapter connected to SRV is empty. If so, show emptyView.
      */
     private fun checkIfEmpty() {
+        /*
+        if(mEmptyView != null && adapter.itemCount == 0) {
+            mEmptyView!!.visibility = View.VISIBLE
+        } else {
+            mEmptyView!!.visibility = View.GONE
+        }
+
+        mEmptyView?.let {
+            it.visibility = if (adapter.itemCount == 0) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
+
+        mEmptyView?.visibility.let {
+            if (adapter.itemCount == 0) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
+        */
+
+        mEmptyView?.visibility = if (adapter.itemCount == 0) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+
+
+        /*
         val isEmpty = adapter.itemCount == 0
         //TODO to clean duplicate code
         mEmptyView?.let {
             it.visibility = if (isEmpty) View.VISIBLE else View.INVISIBLE
             visibility = if (isEmpty) View.INVISIBLE else View.VISIBLE
         }
+        */
     }
 }
