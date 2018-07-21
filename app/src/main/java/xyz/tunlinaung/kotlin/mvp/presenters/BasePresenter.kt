@@ -8,7 +8,7 @@ import xyz.tunlinaung.kotlin.mvp.views.BaseView
 open class BasePresenter<T : BaseView> : ViewModel() {
 
     val mView: T? = null
-    var mErrorLD: MutableLiveData<String> = MutableLiveData()
+    lateinit var mErrorLD: MutableLiveData<String>
 
     open fun initPresenter(view: T? = mView) {
         mErrorLD = MutableLiveData()

@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_home.*
 import xyz.tunlinaung.kotlin.adapters.HealthNewsAdapter
+import xyz.tunlinaung.kotlin.components.SmartScrollListener
 import xyz.tunlinaung.kotlin.mvp.presenters.HealthInfoNewsPresenter
 import xyz.tunlinaung.kotlin.mvp.views.HealthInfoNewsView
 import xyz.tunlinaung.zeewaka_kotlin.R
@@ -19,6 +20,7 @@ class HomeActivity : BaseActivity(), HealthInfoNewsView {
 
     private lateinit var mHealthInfoAdapter: HealthNewsAdapter
     private lateinit var mPresenter: HealthInfoNewsPresenter
+    private lateinit var mSmartScrollListener: SmartScrollListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +36,14 @@ class HomeActivity : BaseActivity(), HealthInfoNewsView {
         mHealthInfoAdapter = HealthNewsAdapter(applicationContext, this)
         rvNews.layoutManager = LinearLayoutManager(applicationContext)
         rvNews.adapter = mHealthInfoAdapter
+        mSmartScrollListener = SmartScrollListener(object : SmartScrollListener.OnSmartScrollListener {
+            override fun onListEndReach() {
+                Snackbar.make(rvNews, "Loading more data.", Snackbar.LENGTH_LONG).show()
+                swipeRefreshLayout.isRefreshing = true
+                mPresenter.onPullRefresh()
+            }
+        })
+        rvNews.addOnScrollListener(mSmartScrollListener)
 
         swipeRefreshLayout.isRefreshing = true
 
@@ -43,6 +53,7 @@ class HomeActivity : BaseActivity(), HealthInfoNewsView {
         })
 
         mPresenter.mErrorLD.observe(this, Observer {
+            swipeRefreshLayout.isRefreshing = false
             Snackbar.make(rvNews, it.toString(), Snackbar.LENGTH_INDEFINITE).show()
         })
 

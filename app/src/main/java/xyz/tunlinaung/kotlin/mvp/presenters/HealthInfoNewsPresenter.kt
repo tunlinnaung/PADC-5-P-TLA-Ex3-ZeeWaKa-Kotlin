@@ -18,7 +18,7 @@ class HealthInfoNewsPresenter : BasePresenter<HealthInfoNewsView>() {
         loadHealthInfo()
     }
 
-    fun loadHealthInfo() {
+    private fun loadHealthInfo() {
         ZeeWaKaModel.getInstance().startLoadingHealthcareInfo(mHealthInfoListLD, mErrorLD)
     }
 
